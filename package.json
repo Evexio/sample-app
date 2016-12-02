@@ -1,0 +1,17 @@
+{
+  "engines": {
+    "node": "4.6.2",
+    "npm": "3.10.10"
+  },
+  "version": "0.0.1",
+  "description": "Evexio starter kit",
+  "main": "index.js",
+  "scripts": {
+    "sdk": "./node index.js"
+  },
+  "dependencies": {
+    "fs-extra": "0.30.0",
+    "lodash": "4.6.1",
+    "strip-json-comments": "2.0.1"
+  }
+}

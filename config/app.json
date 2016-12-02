@@ -1,0 +1,42 @@
+{
+    "defaults": {
+        "jsConfig": {
+            "appName": "Evexio",
+            "productName": "EvexioCRM",
+            "brandName": "EvexioCRM",
+            "appBuild": "1",
+            "appVersion": "1.0.0",
+            "sdkVersion": "4.1.0.377 beta1",
+            "about": {
+                "privacy": "http://evexio.com/mobile_privacy",
+                "tos": "http://evexio.com/mobile_tos",
+                "support": "support.evexio.com",
+                "supportEmail": "support@evexio.com",
+                "copyrightText": "Copyright © 2004-2016 EvexioCRM Inc. All Rights Reserved.",
+                "trademarkText": "Evexio and EvexioCRM are trademarks owned by EvexioCRM Inc. All other trademarks are the property of their respective owners."
+            },
+            "ui": {
+                "icons": {
+                    "actions": {
+                        "skype": "icon icon-skype",
+                        "magic": "icon icon-magic"
+                    }
+                }
+            }
+        },
+        "native": {
+            "ios": {
+                "binaryName": "EvexioCRM"
+            },
+            "android": {
+                "signingKey": {
+                    "keystore": "",
+                    "alias": ""
+                },
+                "binaryName": "EvexioCRM"
+            },
+            "statusBarBackgroundColor": "#bf2020",
+            "splashscreenBackgroundColor": "#7f8384"
+        }
+    }
+}
