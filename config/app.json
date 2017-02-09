@@ -22,6 +22,9 @@
                         "magic": "icon icon-magic"
                     }
                 }
+            },
+            "modules": {
+                "unsupportedModules": ["Employees", "Cases"]
             }
         },
         "native": {

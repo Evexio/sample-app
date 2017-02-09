@@ -14,7 +14,7 @@ var customization = require('%app.core%/customization');
 var dialog = require('%app.core%/dialog');
 
 var customMenuItems = [
-    {
+    /*{
         label: 'Static Panda',
         route: 'StaticPanda',  // results in app.controller.navigate('#StaticPanda'); when item is clicked.
         rank: 11,
@@ -62,7 +62,7 @@ var customMenuItems = [
         label: 'Pull down to refresh',
         route: 'ptr-custom',  // "#ptr-custom" route is opened when menu item is clicked.
         rank: 3,
-    },
+    },*/
 ];
 
 _.each(customMenuItems, customization.registerMainMenuItem);
