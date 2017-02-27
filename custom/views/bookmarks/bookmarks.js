@@ -16,9 +16,10 @@ var ListView = require('%app.views%/list/list-view');
 var deviceFeatures = require('%app.core%/device');
 
 var sampleListData = _.map([
-    ['SugarCRM', 'https://www.sugarcrm.com'],
-    ['StackOverflow', 'http://stackoverflow.com'],
-    ['Javascript', 'https://www.codecademy.com/learn/javascript'],
+    ['SugarCRM', 'http://www.sugarcrm.com'],
+    ['Evexio', 'http://www.evexio.com'],
+    ['CRM Learning Guides', 'http://whatis.techtarget.com/reference/CRM-Learning-Guides'],
+    ['SugarCRM review','https://zapier.com/zapbook/sugarcrm/review/'],
 ], function(item, index) {
     return {
         id: index + 1,
