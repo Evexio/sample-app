@@ -14,11 +14,8 @@
     <label class="field__label">{{label}}</label>
     <div class="field__controls">
         <span class="input-wrapper">
-        {{#if value}}
-            <img width="60px" height="60px" src="{{value}}" alt="" />
-        {{else}}
-            <input type="text" placeholder="{{str 'Tap to Sign'}}">
-        {{/if}}
+            <input type="url" {{#if def.required}}placeholder="{{str 'LBL_REQUIRED'}}"{{/if}} autocorrect="off" value="{{value}}">
+            {{icon "edit.clear" additionalClass="clear-button"}}
         </span>
     </div>
 </div>

@@ -42,6 +42,11 @@ customization.registerListItemDataProvider({
 
 module.exports = customization.declareView({
     parent: ListView,
+
+    // customising view config
+    header: {
+        title: app.lang.get('TODO List'),
+    },
 }, {
 
     contextMenuDisabled: true,
@@ -91,7 +96,7 @@ module.exports = customization.declareView({
     },
 
     // override default behavior on pull to refresh.
-    ptrRefresh: function() {
+    onPullDownToRefresh: function() {
         this.loadData();
 
         // Hide loading animation (spinner).

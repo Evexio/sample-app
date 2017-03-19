@@ -10,15 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<div class="field">
-    <label class="field__label">{{label}}</label>
-    <div class="field__controls">
-        <span class="input-wrapper">
-        {{#if value}}
-            <img width="60px" height="60px" src="{{value}}" alt="" />
-        {{else}}
-            <input type="text" placeholder="{{str 'Tap to Sign'}}">
-        {{/if}}
-        </span>
-    </div>
+
+<div style="position: absolute; min-height: 100%; width: 100%; background: #fff;">
+    <h3>Your message is <span style="color:blue">{{userInput}}</span></h3>
 </div>

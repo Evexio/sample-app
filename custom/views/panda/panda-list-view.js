@@ -44,6 +44,17 @@ customization.registerListItemDataProvider({
 
 module.exports = customization.declareView({
     parent: ListView,
+
+    header: {
+        title: app.lang.get('Panda List'),
+        buttons: {
+            mainMenu: true,
+            rightMenu: false,
+            save: {
+                label: app.lang.get('Save Pandas'),
+            },
+        },
+    },
 }, {
 
     shouldFetchContext: false,  // context loading is disabled.
@@ -70,7 +81,7 @@ module.exports = customization.declareView({
     },
 
     // override default behavior on pull to refresh.
-    ptrRefresh: function() {
+    onPullDownToRefresh: function() {
         this.loadData();
 
         // Hide loading animation (spinner).
@@ -80,5 +91,10 @@ module.exports = customization.declareView({
     onItemClick: function(model) {
         var detailViewRoute = 'Panda/KungFu/' + model.get('systemName');
         app.controller.navigate(detailViewRoute);
+    },
+
+    // header save button click handler
+    onHeaderSaveClick: function() {
+        alert('Pandas are safe now.');
     },
 });

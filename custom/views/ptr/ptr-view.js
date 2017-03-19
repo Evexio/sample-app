@@ -14,8 +14,15 @@ var customization = require('%app.core%/customization');
 var ptr = require('%app.views%/ptr');
 var dialog = require('%app.core%/dialog');
 
-var PtrCustomView = customization.declareView({
+module.exports = customization.declareView({
     register: { type: 'PtrExample' },
+
+    header: {
+        title: app.lang.get('PTR sample'),
+        buttons: {
+            mainMenu: true,
+        },
+    },
 }, {
     template: 'ptr-custom-view',
     shouldFetchContext: false,
@@ -26,32 +33,14 @@ var PtrCustomView = customization.declareView({
         // Add ptr to current view and attach handler.
         ptr({
             view: this,
-            ptrAction: _.bind(this.ptrRefresh, this),
+            handler: _.bind(this.onPullDownToRefresh, this),
         });
     },
 
-    ptrRefresh: function() {
+    onPullDownToRefresh: function() {
         dialog.showAlert('event has been triggered');
 
         // Hide loading animation (spinner).
         this.hidePtrSpinner();
     },
-
-    loadData: function() {
-        // custom data loading method.
-    },
 });
-
-var PtrLayout = customization.declareLayout({
-    views: [PtrCustomView],
-    header: {
-        enabled: true,
-        title: app.lang.get('PTR sample'),
-        buttons: {
-            mainMenu: true,
-        },
-    },
-    register: { type: 'PtrExample' },
-});
-
-module.exports = PtrLayout;
