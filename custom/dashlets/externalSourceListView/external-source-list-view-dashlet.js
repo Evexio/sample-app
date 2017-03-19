@@ -28,7 +28,7 @@ var dashlet = customization.declareDashlet({
     },
 
     // custom implementation uses external source to fetch data and fills list view collection with result.
-    loadViewData: function(view) {
+    loadView: function(view) {
         app.alert.show('ajax_load', {   // need to handle loading messages manually because data is loading bypassing data-manager class.
             level: 'load',
             closeable: false,

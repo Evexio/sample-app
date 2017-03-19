@@ -14,8 +14,16 @@ var ContainerView = require('%app.views%/container/container-view');
 var PandaDetailView = require('./panda-view');
 var customization = require('%app.core%/customization');
 
+// Sample for tab container view.
 module.exports = customization.declareView({
     parent: ContainerView,
+
+    header: {   // providing custom header config that is used when layout header config is empty.
+        title: app.lang.get('Panda Tabs Example'),
+        buttons: {
+            mainMenu: true,
+        },
+    },
 }, {
     // custom template for container-view should contain switcher and views container placeholders.
     template: 'tabbed-panda',

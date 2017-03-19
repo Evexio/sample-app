@@ -23,7 +23,7 @@ var ActivitystreamDashlet = require('%app.dashlets%/activities-view');
 
 module.exports = customization.declareView({
     parent: ActivitystreamDashlet,
-    register: {},   // overriding base ActivityStream dashlet
+    register: true,   // we pass 'true' so this custom view will be registered in app based on it's parent class (ActivitystreamDashlet) and will be used instead of ActivitystreamDashlet everywhere
 }, {
     events: function() {
         var events = this._super();
@@ -36,7 +36,11 @@ module.exports = customization.declareView({
         var $el = $(e.target).closest('article');
         var module = $el.attr('module') || this.module;
         var id = $el.attr('data-id');
-        var model = this.listView.collection.get(id, module);
+
+        //We know that ActivitystreamDashlet is derived from ContainerView so we can use getViews method
+        //to get contained view. In this case there is one View which is ListView
+        var listView = this.getViews()[0];
+        var model = listView.collection.get(id, module);
         if (model) {
             var data = model.get('data');
             if (data && data.location) {

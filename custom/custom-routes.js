@@ -32,8 +32,9 @@
 
 var app = SUGAR.App;
 var customization = require('%app.core%/customization');
-var pandaLayouts = require('./views/panda/panda-layout');
-var ptrLayout = require('./views/ptr/ptr-layout');
+var TabbedPandaView = require('./views/panda/tabbed-panda-view');
+var PandaListView = require('./views/panda/panda-list-view');
+var PandaDetailLayout = require('./views/panda/panda-detail-layout');
 
 // static route does not have parameters, matching url hash is #StaticPanda.
 var staticRoute = {
@@ -54,7 +55,7 @@ var tabbedViewRoute = {
     name: 'tabbed-panda',
     steps: 'Panda/TabbedPanda',
     handler: function() {
-        app.controller.loadScreen({ layouts: [pandaLayouts.PandaTabsLayout] });
+        app.controller.loadScreen({ views: [TabbedPandaView] });    // passing views object directly to loadScreen API will wrap it with NomadLayout. No need to specify layout explicitly.
     },
 };
 
@@ -62,8 +63,8 @@ var todoRoute = {
     name: 'todo-list',
     steps: 'todos',
     handler: function() {
-        var TodoListLayout = require('./views/todos/todo-layout');
-        app.controller.loadScreen({ layouts: [TodoListLayout] });
+        var TodoListView = require('./views/todos/todo-list-view');
+        app.controller.loadScreen({ views: [TodoListView] });
     },
 };
 
@@ -71,7 +72,8 @@ var ptrRoute = {
     name: 'ptr-custom',
     steps: 'ptr-custom',
     handler: function() {
-        app.controller.loadScreen({ layouts: [ptrLayout] });
+        var PtrView = require('./views/ptr/ptr-view');
+        app.controller.loadScreen({ views: [PtrView] });
     },
 };
 
@@ -91,7 +93,7 @@ var oneStepRoute = {
 
     handler: function(screenOptions) {
         _.extend(screenOptions, {
-            layouts: [pandaLayouts.PandaDetailLayout],
+            layouts: [PandaDetailLayout],
         });
 
         //This is an example of the simplest way to load layouts. Just provide constructor references to 'layout' property
@@ -137,11 +139,11 @@ var twoStepsRoute = {
     handler: function(screenOptions) {
         var layouts = [];
         if (screenOptions.pandaType) {
-            layouts.push(pandaLayouts.PandaListLayout);
+            layouts.push({ views: [PandaListView] }); // here we do not add layout constructor. We use a shortcut that adds PandaListView wrapped with default layout.
         }
 
         if (screenOptions.pandaName) {
-            layouts.push(pandaLayouts.PandaDetailLayout);
+            layouts.push(PandaDetailLayout);
         }
 
         screenOptions.layouts = layouts;
@@ -188,6 +190,36 @@ var advancedOptionsRoute = {
     },
 
     // In case if route has just one step and "steps" parameter is a string additional options are declared here.
+};
+
+// The following steps demonstrate how to pass data between different views.
+// In first view we collect user input and then do navigation to another view passing input in data property.
+// In the second view retrieve passed data from options.def object.
+var dataSenderRoute = {
+    name: 'nav-data-sender',
+    steps: 'datasender',
+    handler: function() {
+        var DataSenderView = require('./views/navigation/data-sender-view');
+        app.controller.loadScreen({ views: [DataSenderView] });
+    },
+};
+
+var dataReceiverRoute = {
+    name: 'nav-data-receiver',
+    steps: 'datareceiver',
+    handler: function(options) {
+        var DataReceiverView = require('./views/navigation/data-receiver-view');
+
+        // In this example data property is retrieved from options object and passed to loadScreen method explicitly because
+        // we need to show custom view that is not presented in meta.
+        // In case of standard navigation that is handled by controller data object is passed to loadScreen method automatically.
+        // Eg: doing controller.navigate({ url: 'Accounts', data: data } will show Accounts list view and listView.options.def will have
+        // data object without any additional steps from developer side.
+        app.controller.loadScreen({
+            views: [DataReceiverView],
+            data: options.data, // options.data contains data object from app.controller.navigate method.
+        });
+    },
 };
 
 /*
@@ -240,7 +272,7 @@ var upNavigationMap = {
     },
 };
 
-var customRoutes = [staticRoute, tabbedViewRoute, todoRoute, ptrRoute, oneStepRoute, twoStepsRoute, advancedOptionsRoute];
+var customRoutes = [staticRoute, tabbedViewRoute, todoRoute, ptrRoute, oneStepRoute, twoStepsRoute, advancedOptionsRoute, dataSenderRoute, dataReceiverRoute];
 
 // registering custom routes
 customization.registerRoutes(customRoutes, { upNavigationMap: upNavigationMap });

@@ -204,6 +204,23 @@ var customActions = [
 
         rank: 0,
     },
+
+    // Override default email action on Contact record toolbar
+    {
+        name: 'email',
+        modules: ['Contacts'],
+
+        // Type is necessary
+        types: ['toolbar'],
+        rank: 0,
+    },
+
+    // Hide file action on both toolbar and context-menu
+    {
+        name: 'file',
+        types: ['toolbar', 'context-menu'],
+        isVisible: false,
+    },
 ];
 
 _.each(customActions, customization.registerRecordAction);

@@ -21,7 +21,7 @@ var BaseAddressEditView = require('%app.views%/edit/address-edit-view');
  */
 var CustomAddressEditView = customization.declareView({
     parent: BaseAddressEditView,
-    register: {}, // overriding base address edit view.
+    register: true, // we pass 'true' so this custom view will be registered in app based on it's parent class (BaseAddressEditView) and will be used instead of BaseAddressEditView everywhere
 }, {
 
     events: { 'click .field__geoplacemark': 'onGetGeoPlacemarkClick', },
@@ -63,7 +63,7 @@ var CustomAddressEditView = customization.declareView({
 
     // Sets the model data if we match search key. eg, if the model has 'Office_street'/'HomeAddress_street' field, this will set it with street value.
     _setModelData: function(searchKey, value) {
-        var key = _.find(this.addressFieldsNames, function(item) { return item.match(new RegExp(searchKey, 'i')); });
+        var key = _.find(this.addressFields, function(item) { return item.name.match(new RegExp(searchKey, 'i')); });
 
         if (key) {
             this.model.set(key, value);

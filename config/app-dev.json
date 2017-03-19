@@ -1,5 +1,37 @@
 {
     "jsConfig": {
-        "siteUrl": "http://localhost:8888/sugarcrm"
+        "appName": "Evexio",
+        "productName": "EvexioCRM",
+        "brandName": "EvexioCRM",
+        "appBuild": "1",
+        "appVersion": "1.0.0",
+        "about": {
+            "privacy": "http://evexio.com/mobile_privacy",
+            "tos": "http://evexio.com/mobile_tos",
+            "support": "support.evexio.com",
+            "supportEmail": "support@evexio.com",
+            "copyrightText": "Copyright © 2004-2016 EvexioCRM Inc. All Rights Reserved.",
+            "trademarkText": "Evexio and EvexioCRM are trademarks owned by EvexioCRM Inc. All other trademarks are the property of their respective owners."
+        },
+        "modules": {
+            "unsupportedModules": ["Employees", "Cases"]
+        },
+        "siteUrl": "http://localhost:8888/sugarcrm",
+        "loginSettings": {
+            "externalLoginVisible": false,
+            "showLoginUrl": false,
+            "defaultServerUrl": "http://localhost:8888/sugarcrm"
+        },
+        "offline": {
+            "enabled": false
+        }
+    },
+    "native": {
+        "ios": {
+            "binaryName": "EvexioCRM"
+        },
+        "android": {
+            "binaryName": "EvexioCRM"
+        }
     }
 }

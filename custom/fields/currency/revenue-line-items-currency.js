@@ -34,8 +34,7 @@ function _validate(fields, errors, callback) {
     callback(null, fields, errors);
 }
 
-//By registering field named as 'MobileRevenueLineItemsCurrency' we are using sidecar naming convention.
-//Using it Sidecar will automatically create instance of this field when inside RevenueLineItems module
+//Extend existing CurrencyField only for 'RevenueLineItems' module
 var RliCurrencyField = customization.declareField({
     parent: CurrencyField,
     register: { module: 'RevenueLineItems' },

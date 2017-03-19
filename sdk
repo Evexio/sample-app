@@ -19,10 +19,17 @@ const path = require('path');
 const HOME = require('os').homedir();
 const SDK_PATH = require('./get-sdk-path')();
 
+const helpArgs = ['h', '-h', '/h', '--help', 'help'];
+
 let argv = process.argv.slice(2);
 
-spawnProcess(path.resolve(HOME, '.nvm', 'nvm-exec'), ['./node_modules/.bin/cordova'].concat(argv), {
+if (argv.length && (helpArgs.indexOf(argv[0]) === -1)) {
+    argv = argv.concat(['--app-path', __dirname]);
+}
+
+argv.push('--sdk-run');
+
+spawnProcess(path.resolve(HOME, '.nvm', 'nvm-exec'), ['./gulp'].concat(argv), {
     cwd: SDK_PATH,
     stdio: 'inherit',
 });
-
